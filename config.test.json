@@ -1,4 +1,4 @@
 {
 	"prefix": "!",
-	"token": "token goes here"
+	"token": "Bot token goes here and rename this file to 'package.json' afterwards"
 }
