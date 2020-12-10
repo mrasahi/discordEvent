@@ -1,11 +1,3 @@
-// module.exports = {
-// 	name: 'count',
-// 	description: 'simple counter.',
-// 	execute(message, args) {
-// 		message.channel.send(`Count: ${count}`);
-// 	},
-// };
-
 const fs = require('fs')
 const path = require('path')
 let countRaw = fs.readFileSync(__dirname + '/events/count.json')
