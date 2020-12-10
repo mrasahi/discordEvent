@@ -10,6 +10,8 @@ module.exports = {
 	name: 'count',
     description: 'simple counter.',
     args: true,
+    guildOnly: false,
+    // cooldown: 3,
 	execute(message, args) {
         let count = 0
         if (args[0] === 'add') {
