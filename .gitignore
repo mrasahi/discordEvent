@@ -143,4 +143,4 @@ $RECYCLE.BIN/
 
 
 # Discord Bot token ignore
-token.js
+config.json
