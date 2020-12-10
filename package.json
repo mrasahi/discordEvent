@@ -1,0 +1,25 @@
+{
+  "name": "discordevent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "discord.js": "^12.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrasahi/discordEvent.git"
+  },
+  "author": "masahi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrasahi/discordEvent/issues"
+  },
+  "homepage": "https://github.com/mrasahi/discordEvent#readme",
+  "keywords": []
+}
