@@ -31,6 +31,10 @@ client.on('message', message => {
 
     const command = client.commands.get(commandName);
 
+    if (command.args && !args.length) {
+	    return message.channel.send(`Arguments required for this command, ${message.author}!`);
+    }
+
     // Sample
     // if (command === 'ping') {
 	// 	client.commands.get('ping').execute(message, args);
