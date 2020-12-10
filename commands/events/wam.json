@@ -1,0 +1,10 @@
+{
+    "wam1": {
+        "players": 16,
+        "current": 0
+    },
+    "wam2": {
+        "players": 8,
+        "current": 0
+    }
+}
