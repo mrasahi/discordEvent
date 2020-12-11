@@ -8,6 +8,6 @@ const DiscordServer = new Schema({
   speedduel: Number,
   duellinks: Number,
   giantcard: Number
-}, )
+}, {strict: false})
 
 module.exports = model('DiscordServer', DiscordServer)

@@ -27,7 +27,7 @@ module.exports = {
                             if (messages.first().content >= 0) {
                                 result.wam++
                                 // console.log(result)
-                                DiscordServer.findByIdAndUpdate(message.guild.id, { $set: { wam: result.wam, test: 'no u' }}, {new:true, upsert:true} )
+                                DiscordServer.findByIdAndUpdate(message.guild.id, { $set: { ["winamatevent" + result.wam]: messages.first().content,wam: result.wam }}, {new:true, upsert:true} )
                                 .then(() => {
                                     console.log(`updated db`)
                                     message.channel.send(`${messages.first().content} players will be in this event`)
