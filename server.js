@@ -1,7 +1,8 @@
 // Imports required to run app properly
 const fs = require('fs')
 const Discord = require('discord.js');
-const { token, prefix } = require('./config.json');
+const { token, prefix, mongoPath } = require('./config.json');
+const mongoose = require('mongoose')
 
 // Collections
 const client = new Discord.Client();
@@ -18,8 +19,23 @@ for (const file of commandFiles) {
 
 // Runs when the bot is live
 // .once will only run it the first time
-client.once('ready', () => {
+client.on('ready', () => {
     console.log('Bot is online');
+    mongoose.connect(mongoPath, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false
+    })
+        .then(() => {
+            // Connected to database successfully
+            console.log('Connected to database')
+        })
+        .catch((err) => {
+            // Error connecting to database
+            console.log(err)
+        });
+
 })
 
 

@@ -1,0 +1,5 @@
+{
+	"prefix": "!",
+	"token": "Bot token goes here and rename this file to 'package.json' afterwards",
+	"mongoPath": "mongodb://localhost/discordEvent_db"
+}

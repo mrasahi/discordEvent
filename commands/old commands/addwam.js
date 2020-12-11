@@ -6,7 +6,7 @@ const path = require('path')
 
 module.exports = {
     name: 'addwam',
-    description: 'Add a new Win-A-Mat event',
+    description: 'Add a Win-A-Mat event',
     args: false,
     usage: '<user> <role>',
     execute(message, args) {
@@ -21,17 +21,32 @@ module.exports = {
             message.channel.awaitMessages(filter, { time: 60000, max: 1, errors: ['time'] })
                 .then(messages => {
                     if (messages.first().content >= 0) {
-                        eventData.wam++;
+                        eventData.wam.events++;
+                        eventData.wam[`wam${eventData.wam.events}`] = messages.first().content
                         fs.writeFileSync(__dirname + '/events/events.json', JSON.stringify(eventData))
                         message.channel.send(`${messages.first().content} players will be in this event`)
                         message.guild.channels
-                        .create(`win-A-Mat-${eventData.wam}`, {
+                        .create(`win-a-mat-${eventData.wam.events}`, {
                             type: 'text',
                         })
                         .then((channel) => {
                             // console.log(channel)
-                            message.channel.send(`Channel win-A-Mat-${eventData.wam} has been created.\nTotal WAM events: ${eventData.wam}`)
-                            
+                            message.channel.send(`Channel win-A-Mat-${eventData.wam.events} has been created.\nTotal WAM events: ${eventData.wam.events}`)
+                            message.guild.roles.create({
+                                data: {
+                                  name: `Win-A-Mat-${eventData.wam.events}`,
+                                  color: 'BLUE',
+                                },
+                                reason: 'Win-A-Mat event created',
+                              })
+                                .then((role) => {
+                                    console.log(role)
+                                    message.channel.send(`Role Win-A-Mat-${eventData.wam.events} has been created`)
+                                })
+                                .catch(err => {
+                                    console.log(err)
+                                    message.channel.send(`An error has occured creating a role`)
+                                })
                         })
                         .catch(err => {
                             console.log(err)
