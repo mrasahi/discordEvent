@@ -3,11 +3,16 @@ const { model, Schema } = require('mongoose')
 const DiscordServer = new Schema({
   _id: String,
   serverid: String,
-  wam: Number,
-  structuredeck: Number,
-  speedduel: Number,
-  duellinks: Number,
-  giantcard: Number
+  wam: Array,
+  structuredeck: Array,
+  speedduel: Array,
+  duellinks: Array,
+  giantcard: Array,
+  wamcategory: String,
+  structuredeckcategory: String,
+  speedduelcategory: String,
+  duellinkscategory: String,
+  giantcardcategory: String,
 }, {strict: false})
 
 module.exports = model('DiscordServer', DiscordServer)

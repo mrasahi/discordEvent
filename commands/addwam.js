@@ -37,7 +37,14 @@ module.exports = {
                                         })
                                         .then((channel) => {
                                             // console.log(channel)
-                                            message.channel.send(`Channel win-A-Mat-${result.wam} has been created.\nTotal WAM events: ${result.wam}`)
+                                            channel.setParent(result.wamcategory)
+                                                .then(() => {
+                                                    message.channel.send(`Channel win-A-Mat-${result.wam} has been created.\nTotal WAM events: ${result.wam}`)
+                                                })
+                                                .catch(err => {
+                                                    message.channel.send(`Error moving channel to category`)
+                                                    console.log(err)
+                                                })
                                         })
                                         .catch(err => {
                                             console.log(err)
