@@ -21,7 +21,7 @@ for (const file of commandFiles) {
 // .once will only run it the first time
 client.on('ready', () => {
     console.log('Bot is online');
-    mongoose.connect(mongoPath, {
+    mongoose.connect(process.env.MONGODB_URI || mongoPath, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
@@ -87,4 +87,4 @@ client.on('message', message => {
 })
 
 // Uses bot token to connect and run
-client.login(token);
+client.login(process.env.BOT_TOKEN || token);
