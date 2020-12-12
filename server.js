@@ -1,8 +1,11 @@
 // Imports required to run app properly
 const fs = require('fs')
 const Discord = require('discord.js');
-const { token, prefix, mongoPath } = require('./config.json');
+// const { token, prefix, mongoPath } = require('./config.json');
 const mongoose = require('mongoose')
+
+const prefix = '!'
+const mongoPath = "mongodb://localhost/discordEvent_db"
 
 // Collections
 const client = new Discord.Client();
