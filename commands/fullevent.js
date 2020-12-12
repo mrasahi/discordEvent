@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client()
-const fs = require('fs')
-const path = require('path')
+const DiscordServer = require('../models/DiscordServer.js')
 
 
 module.exports = {
@@ -10,9 +9,17 @@ module.exports = {
     args: false,
     usage: '<user> <role>',
 	execute(message, args) {
-        let eventRaw = fs.readFileSync(__dirname + '/events/events.json')
-        let eventData = JSON.parse(eventRaw)
-        console.log(eventData)
-        // message.channel.send(`There are a total of ${total} events.\nWin-A-Mat: ${eventData.wam}\nStructure Deck: ${eventData.structuredeck}\nSpeed Duel: ${eventData.speedduel}\nDuel Links: ${eventData.duellinks}\nGiant Card: ${eventData.giantcard}`)
+        DiscordServer.findById(message.guild.id)
+            .then(result => {
+                // console.log(result.wam)
+                let allWam = result.wam.map(wam => `${Object.keys(wam)}: ${Object.values(wam)}`)
+                console.log(allWam.join('\n'))
+                message.channel.send(`Total WAM events: ${result.wam.length}\n------------------------------\n${allWam.join('\n')}`)
+            })
+            .catch(err => {
+                console.log(err)
+                message.channel.send('An error has occured reading the database')
+            })
+
 	},
 };

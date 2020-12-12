@@ -19,27 +19,27 @@ module.exports = {
                     return
                 }
                 // Second prompt for player count
-                message.channel.send('How many players are in this event?').then(() => {
+                message.channel.send(`Creating Win-A-Mat-${result.wam.length +1}\nHow many players are in this event?`).then(() => {
                     const filter = m => message.author.id === m.author.id;
                     message.channel.awaitMessages(filter, { time: 60000, max: 1, errors: ['time'] })
                         .then(messages => {
                             // Check reply message statement
                             if (messages.first().content >= 0) {
-                                result.wam++
-                                // console.log(result)
-                                DiscordServer.findByIdAndUpdate(message.guild.id, { $set: { ["winamatevent" + result.wam]: messages.first().content,wam: result.wam }}, {new:true, upsert:true} )
+                                let newWam = result.wam.length + 1
+                                // console.log(newWam)
+                                DiscordServer.findByIdAndUpdate(message.guild.id, { $push: { wam: {["winamatevent" + newWam]: messages.first().content} }}, {new:true, upsert:true} )
                                 .then(() => {
                                     console.log(`updated db`)
                                     message.channel.send(`${messages.first().content} players will be in this event`)
                                     message.guild.channels
-                                        .create(`win-a-mat-${result.wam}`, {
+                                        .create(`win-a-mat-${newWam}`, {
                                             type: 'text',
                                         })
                                         .then((channel) => {
                                             // console.log(channel)
                                             channel.setParent(result.wamcategory)
                                                 .then(() => {
-                                                    message.channel.send(`Channel win-A-Mat-${result.wam} has been created.\nTotal WAM events: ${result.wam}`)
+                                                    message.channel.send(`Channel Win-A-Mat-${newWam} has been created.`)
                                                 })
                                                 .catch(err => {
                                                     message.channel.send(`Error moving channel to category`)
@@ -52,14 +52,14 @@ module.exports = {
                                         })
                                         message.guild.roles.create({
                                             data: {
-                                                name: `Win-A-Mat-${result.wam}`,
+                                                name: `Win-A-Mat-${newWam}`,
                                                 color: 'BLUE',
                                             },
                                             reason: 'Win-A-Mat event created',
                                         })
                                             .then((role) => {
                                                 // console.log(role)
-                                                message.channel.send(`Role Win-A-Mat-${result.wam} has been created`)
+                                                message.channel.send(`Role Win-A-Mat-${newWam} has been created`)
                                             })
                                             .catch(err => {
                                                 console.log(err)
