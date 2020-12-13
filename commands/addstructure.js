@@ -4,8 +4,8 @@ const DiscordServer = require('../models/DiscordServer.js')
 
 
 module.exports = {
-    name: 'addwam',
-    description: 'Add a Win-A-Mat event',
+    name: 'addstructure',
+    description: 'Add a Structure Deck event',
     args: false,
     usage: '<user> <role>',
     execute(message, args) {
@@ -19,27 +19,27 @@ module.exports = {
                     return
                 }
                 // Second prompt for player count
-                message.channel.send(`Creating Win-A-Mat-${result.wam.length +1}\nHow many players are in this event?`).then(() => {
+                message.channel.send(`Creating Win-A-Mat-${result.structuredeck.length +1}\nHow many players are in this event?`).then(() => {
                     const filter = m => message.author.id === m.author.id;
                     message.channel.awaitMessages(filter, { time: 60000, max: 1, errors: ['time'] })
                         .then(messages => {
                             // Check reply message statement
                             if (messages.first().content >= 0) {
-                                let newWam = result.wam.length + 1
-                                // console.log(newWam)
-                                DiscordServer.findByIdAndUpdate(message.guild.id, { $push: { wam: {["Win-A-Mat" + newWam]: messages.first().content} }}, {new:true, upsert:true} )
+                                let newStructure = result.structuredeck.length + 1
+                                // console.log(newStructure)
+                                DiscordServer.findByIdAndUpdate(message.guild.id, { $push: { structuredeck: {["Structure-Deck" + newStructure]: messages.first().content} }}, {new:true, upsert:true} )
                                 .then(() => {
                                     // console.log(`updated db`)
                                     message.channel.send(`${messages.first().content} players will be in this event`)
                                     message.guild.channels
-                                        .create(`win-a-mat-${newWam}`, {
+                                        .create(`structure-deck-${newStructure}`, {
                                             type: 'text',
                                         })
                                         .then((channel) => {
                                             // console.log(channel)
-                                            channel.setParent(result.wamcategory)
+                                            channel.setParent(result.structuredeckcategory)
                                                 .then(() => {
-                                                    message.channel.send(`Channel Win-A-Mat-${newWam} has been created.`)
+                                                    message.channel.send(`Channel Structure-Deck-${newStructure} has been created.`)
                                                 })
                                                 .catch(err => {
                                                     message.channel.send(`Error moving channel to category`)
@@ -52,14 +52,14 @@ module.exports = {
                                         })
                                         message.guild.roles.create({
                                             data: {
-                                                name: `Win-A-Mat-${newWam}`,
-                                                color: 'BLUE',
+                                                name: `Structure-Deck-${newStructure}`,
+                                                color: 'RED',
                                             },
-                                            reason: 'Win-A-Mat event created',
+                                            reason: 'Structure-Deck event created',
                                         })
                                             .then((role) => {
                                                 // console.log(role)
-                                                message.channel.send(`Role Win-A-Mat-${newWam} has been created`)
+                                                message.channel.send(`Role Structure-Deck-${newStructure} has been created`)
                                             })
                                             .catch(err => {
                                                 console.log(err)
