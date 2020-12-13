@@ -18,8 +18,7 @@ module.exports = {
                 let links = result.duellinks.length
                 let giant = result.giantcard.length
 
-
-                message.channel.send(`Win-A-Mat: ${wam}\nStructure Deck: ${structure}\nSpeed Duels: ${speed}\nDuel Links: ${links}\nGiant Card: ${giant}\nTotal: ${wam + structure + speed + links + giant}`)
+                message.channel.send(`Win-A-Mat: ${wam}\nStructure Deck: ${structure}\nSpeed Duels: ${speed}\nDuel Links: ${links}\nGiant Card: ${giant}\n===============\nTotal Events: ${wam + structure + speed + links + giant}`)
 
             })
             .catch(err => {

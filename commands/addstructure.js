@@ -27,7 +27,7 @@ module.exports = {
                             if (messages.first().content >= 0) {
                                 let newStructure = result.structuredeck.length + 1
                                 // console.log(newStructure)
-                                DiscordServer.findByIdAndUpdate(message.guild.id, { $push: { structuredeck: {["Structure-Deck" + newStructure]: messages.first().content} }}, {new:true, upsert:true} )
+                                DiscordServer.findByIdAndUpdate(message.guild.id, { $push: { structuredeck: {["Structure-Deck-" + newStructure]: messages.first().content} }}, {new:true, upsert:true} )
                                 .then(() => {
                                     // console.log(`updated db`)
                                     message.channel.send(`${messages.first().content} players will be in this event`)

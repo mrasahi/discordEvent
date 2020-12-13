@@ -4,8 +4,8 @@ const DiscordServer = require('../models/DiscordServer.js')
 
 
 module.exports = {
-    name: 'addwam',
-    description: 'Add a Win-A-Mat event',
+    name: 'addgiant',
+    description: 'Add a Giant Card event',
     args: false,
     usage: '<user> <role>',
     execute(message, args) {
@@ -19,27 +19,27 @@ module.exports = {
                     return
                 }
                 // Second prompt for player count
-                message.channel.send(`Creating Win-A-Mat-${result.wam.length +1}\nHow many players are in this event?`).then(() => {
+                message.channel.send(`Creating Giant-Card-${result.giantcard.length +1}\nHow many players are in this event?`).then(() => {
                     const filter = m => message.author.id === m.author.id;
                     message.channel.awaitMessages(filter, { time: 60000, max: 1, errors: ['time'] })
                         .then(messages => {
                             // Check reply message statement
                             if (messages.first().content >= 0) {
-                                let newWam = result.wam.length + 1
-                                // console.log(newWam)
-                                DiscordServer.findByIdAndUpdate(message.guild.id, { $push: { wam: {["Win-A-Mat-" + newWam]: messages.first().content} }}, {new:true, upsert:true} )
+                                let newGiant = result.giantcard.length + 1
+                                // console.log(newGiant)
+                                DiscordServer.findByIdAndUpdate(message.guild.id, { $push: { giantcard: {["Giant-Card-" + newGiant]: messages.first().content} }}, {new:true, upsert:true} )
                                 .then(() => {
                                     // console.log(`updated db`)
                                     message.channel.send(`${messages.first().content} players will be in this event`)
                                     message.guild.channels
-                                        .create(`win-a-mat-${newWam}`, {
+                                        .create(`win-a-mat-${newGiant}`, {
                                             type: 'text',
                                         })
                                         .then((channel) => {
                                             // console.log(channel)
-                                            channel.setParent(result.wamcategory)
+                                            channel.setParent(result.giantcardcategory)
                                                 .then(() => {
-                                                    message.channel.send(`Channel Win-A-Mat-${newWam} has been created.`)
+                                                    message.channel.send(`Channel Giant-Card-${newGiant} has been created.`)
                                                 })
                                                 .catch(err => {
                                                     message.channel.send(`Error moving channel to category`)
@@ -52,14 +52,14 @@ module.exports = {
                                         })
                                         message.guild.roles.create({
                                             data: {
-                                                name: `Win-A-Mat-${newWam}`,
+                                                name: `Giant-Card-${newGiant}`,
                                                 color: 'BLUE',
                                             },
-                                            reason: 'Win-A-Mat event created',
+                                            reason: 'Giant-Card event created',
                                         })
                                             .then((role) => {
                                                 // console.log(role)
-                                                message.channel.send(`Role Win-A-Mat-${newWam} has been created`)
+                                                message.channel.send(`Role Giant-Card-${newGiant} has been created`)
                                             })
                                             .catch(err => {
                                                 console.log(err)
