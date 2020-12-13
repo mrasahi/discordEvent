@@ -25,31 +25,31 @@ module.exports = {
                 } else {
                     // console.log(`server not in db. will create`)
                     // Creates categories in the channel
-                    message.guild.channels.create(`Win-A-Mat`, { type: 'category', })
+                    message.guild.channels.create(`win-a-mat`, { type: 'category', })
                         .then(result => {
                             wam = result.id
                         })
                         .catch(err => console.log(err))
 
-                    message.guild.channels.create(`Structure-Deck`, { type: 'category', })
+                    message.guild.channels.create(`structure-deck`, { type: 'category', })
                         .then(result => {
                             structure = result.id
                         })
                         .catch(err => console.log(err))
 
-                    message.guild.channels.create(`Speed-Duel`, { type: 'category', })
+                    message.guild.channels.create(`speed-duel`, { type: 'category', })
                         .then(result => {
                             speed = result.id
                         })
                         .catch(err => console.log(err))
 
-                    message.guild.channels.create(`Duel-Links`, { type: 'category', })
+                    message.guild.channels.create(`duel-links`, { type: 'category', })
                         .then(result => {
                             links = result.id
                         })
                         .catch(err => console.log(err))
 
-                    message.guild.channels.create(`Giant-Card`, { type: 'category', })
+                    message.guild.channels.create(`giant-card`, { type: 'category', })
                         .then(result => {
                             giant = result.id
                         })
