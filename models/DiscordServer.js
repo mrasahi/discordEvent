@@ -13,7 +13,8 @@ const DiscordServer = new Schema({
   speedduelcategory: String,
   duellinkscategory: String,
   giantcardcategory: String,
-  eventEnd: Boolean
+  eventEnd: Boolean,
+  uniqueplayer: String,
 }, {strict: false})
 
 module.exports = model('DiscordServer', DiscordServer)

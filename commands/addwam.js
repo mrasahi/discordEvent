@@ -53,7 +53,7 @@ module.exports = {
                                         message.guild.roles.create({
                                             data: {
                                                 name: `Win-A-Mat-${newWam}`,
-                                                color: 'BLUE',
+                                                color: '3498db',
                                             },
                                             reason: 'Win-A-Mat event created',
                                         })

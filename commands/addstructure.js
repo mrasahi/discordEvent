@@ -53,7 +53,7 @@ module.exports = {
                                         message.guild.roles.create({
                                             data: {
                                                 name: `Structure-Deck-${newStructure}`,
-                                                color: 'RED',
+                                                color: '9b59b6',
                                             },
                                             reason: 'Structure-Deck event created',
                                         })

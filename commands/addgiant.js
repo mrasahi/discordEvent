@@ -53,7 +53,7 @@ module.exports = {
                                         message.guild.roles.create({
                                             data: {
                                                 name: `Giant-Card-${newGiant}`,
-                                                color: 'BLUE',
+                                                color: '992d22',
                                             },
                                             reason: 'Giant-Card event created',
                                         })

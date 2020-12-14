@@ -53,7 +53,7 @@ module.exports = {
                                         message.guild.roles.create({
                                             data: {
                                                 name: `Speed-Duel-${newSpeed}`,
-                                                color: 'BLUE',
+                                                color: 'e67e22',
                                             },
                                             reason: 'Speed-Duel event created',
                                         })

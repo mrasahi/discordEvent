@@ -50,6 +50,13 @@ module.exports = {
 
                     }
 
+                    // Delete unique player role
+                    message.guild.roles.cache.find(role => role.id === result.uniqueplayer).delete()
+                        .then(() => {
+                            console.log(`Unique Player role deleted`)
+                        })
+                        .catch(err => console.log(err))
+
 
                     deleteFunction(`Win-A-Mat`)
                     deleteFunction(`Structure-Deck`)

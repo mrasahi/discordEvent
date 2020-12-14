@@ -14,6 +14,7 @@ module.exports = {
         let speed = ''
         let links = ''
         let giant = ''
+        let unique = ''
 
         DiscordServer.findById(message.guild.id)
             .then(result => {
@@ -23,8 +24,19 @@ module.exports = {
                     message.channel.send(`Error. Server ID has already been saved`)
                     return
                 } else {
-                    // console.log(`server not in db. will create`)
-                    // Creates categories in the channel
+
+                    message.guild.roles.create({
+                        data: {
+                            name: `Player`,
+                            color: 'db23b5',
+                        },
+                        reason: 'Unique player count role',
+                    })
+                        .then(result => {
+                            unique = result.id
+                        })
+                        .catch(err => console.log(err))
+
                     message.guild.channels.create(`win-a-mat`, { type: 'category', })
                         .then(result => {
                             wam = result.id
@@ -56,6 +68,8 @@ module.exports = {
                         .catch(err => console.log(err))
 
 
+
+
                         // Creates field in the database
                         .then(() => {
                             const currentServer = new DiscordServer({
@@ -71,7 +85,8 @@ module.exports = {
                                 speedduelcategory: speed,
                                 duellinkscategory: links,
                                 giantcardcategory: giant,
-                                eventEnd: false
+                                eventEnd: false,
+                                uniqueplayer: unique
                             })
                             currentServer.save()
                                 .then(result => {
