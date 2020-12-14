@@ -2,7 +2,7 @@
 const fs = require('fs')
 const Discord = require('discord.js');
 // const { token, prefix, mongoPath } = require('./config.json');
-// const { token } = require('./config.json')
+const { token } = require('./config.json')
 const mongoose = require('mongoose')
 
 // Command prefix and db path
@@ -66,6 +66,13 @@ client.on('message', message => {
     // guildOnly are commands only meant to be used inside servers and not through DMs
     if (command.guildOnly && message.channel.type === 'dm') {
         return message.reply('Command is only from server-side');
+    }
+
+
+    if (!message.member.roles.cache.find(role => role.name === 'Admin')) {
+        console.log(`member has does not have Admin`)
+        return message.channel.send('Admin role required').then(msg => msg.delete({ timeout: 3000 }))
+        .catch(err => console.log(err))
     }
 
     // Shortened to run commands

@@ -12,7 +12,7 @@ module.exports = {
         // Will update eventEnd status to true and allow cleanup command
         DiscordServer.findByIdAndUpdate(message.guild.id, { eventEnd: true })
             .then(result => {
-                message.channel.send(`Event has ended and marked true`)
+                message.channel.send('Event ended. The `!cleanup` command is available')
             })
             .catch(err => {
                 console.log(err)

@@ -10,6 +10,7 @@ module.exports = {
     execute(message, args) {
 
         let wam = ''
+        let wamex = ''
         let structure = ''
         let speed = ''
         let links = ''
@@ -40,6 +41,12 @@ module.exports = {
                     message.guild.channels.create(`win-a-mat`, { type: 'category', })
                         .then(result => {
                             wam = result.id
+                        })
+                        .catch(err => console.log(err))
+
+                    message.guild.channels.create(`win-a-mat-ex`, { type: 'category', })
+                        .then(result => {
+                            wamex = result.id
                         })
                         .catch(err => console.log(err))
 
@@ -76,11 +83,13 @@ module.exports = {
                                 _id: message.guild.id,
                                 serverid: message.guild.id,
                                 wam: [],
+                                wamex: [],
                                 structuredeck: [],
                                 speedduel: [],
                                 duellinks: [],
                                 giantcard: [],
                                 wamcategory: wam,
+                                wamexcategory: wamex,
                                 structuredeckcategory: structure,
                                 speedduelcategory: speed,
                                 duellinkscategory: links,

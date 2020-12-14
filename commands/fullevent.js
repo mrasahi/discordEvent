@@ -30,14 +30,15 @@ module.exports = {
 
                 // Cleanup
                 let wam = eachEvent(`Win-A-Mat`, result.wam)
+                let wamex = eachEvent(`Win-A-Mat-Ex`, result.wamex)
                 let structure = eachEvent(`Structure Deck`, result.structuredeck)
                 let speed = eachEvent(`Speed Duels`, result.speedduel)
                 let links = eachEvent(`Duel Links`, result.duellinks)
                 let giant = eachEvent(`Giant Card`, result.giantcard)
-                let total = `Total Events: ${wam.count + structure.count + speed.count + links.count + giant.count}\n==============================\n`
+                let total = `Total Events: ${wam.count + wamex.count + structure.count + speed.count + links.count + giant.count}\n==============================\n`
 
                 // Message Events. Message will split if over 2000
-                message.channel.send(total + wam.data + structure.data + speed.data + links.data + giant.data, { split: true } )
+                message.channel.send(total + wam.data + wamex.data + structure.data + speed.data + links.data + giant.data, { split: true } )
 
             })
             .catch(err => {

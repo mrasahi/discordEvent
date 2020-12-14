@@ -77,7 +77,7 @@ module.exports = {
                         })
                 } else {
                     // If event has not ended
-                    message.channel.send(`Event has not been marked ended. Please run the endevent command before running cleanup`)
+                    message.channel.send('Event has not been marked ended. Please run `!eventend` before running cleanup')
                 }
             })
             .catch(err => {

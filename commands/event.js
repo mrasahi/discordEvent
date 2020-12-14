@@ -13,12 +13,13 @@ module.exports = {
             .then(result => {
 
                 let wam = result.wam.length
+                let wamex = result.wamex.length
                 let structure = result.structuredeck.length
                 let speed = result.speedduel.length
                 let links = result.duellinks.length
                 let giant = result.giantcard.length
 
-                message.channel.send(`Win-A-Mat: ${wam}\nStructure Deck: ${structure}\nSpeed Duels: ${speed}\nDuel Links: ${links}\nGiant Card: ${giant}\n===============\nTotal Events: ${wam + structure + speed + links + giant}`)
+                message.channel.send(`Win-A-Mat: ${wam}\nWin-A-Mat-Ex: ${wamex}\nStructure Deck: ${structure}\nSpeed Duels: ${speed}\nDuel Links: ${links}\nGiant Card: ${giant}\n===============\nTotal Events: ${wam + wamex + structure + speed + links + giant}`)
 
             })
             .catch(err => {
