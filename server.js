@@ -2,7 +2,7 @@
 const fs = require('fs')
 const Discord = require('discord.js');
 // const { token, prefix, mongoPath } = require('./config.json');
-const { token } = require('./config.json')
+// const { token } = require('./config.json')
 const mongoose = require('mongoose')
 
 const prefix = '!'
