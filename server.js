@@ -5,13 +5,12 @@ const Discord = require('discord.js');
 // const { token } = require('./config.json')
 const mongoose = require('mongoose')
 
+// Command prefix and db path
 const prefix = '!'
 const mongoPath = "mongodb://localhost/discordEvent_db"
 
-// Collections
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
-const cooldowns = new Discord.Collection();
 
 // fs reads commands file and assignes commands as their file name
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -69,22 +68,8 @@ client.on('message', message => {
         return message.reply('Command is only from server-side');
     }
 
-    // Cooldown and help handlers needed
-    // https://discordjs.guide/command-handling/adding-features.html#cooldowns
-
-    // Sample
-    // if (command === 'ping') {
-	// 	client.commands.get('ping').execute(message, args);
-	// } else if (command === 'beep') {
-	// 	client.commands.get('beep').execute(message, args);
-	// } else if (command === 'server') {
-	// 	client.commands.get('server').execute(message, args);
-    // }
-    
-
     // Shortened to run commands
     command.execute(message, args)
-
 
 
 

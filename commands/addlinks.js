@@ -15,7 +15,7 @@ module.exports = {
             .then(result => {
                 // console.log(result)
                 if (result === null) {
-                    message.channel.send(`Error. Server ID is not saved in database`)
+                    message.channel.send('Server ID has not been saved. Please run `!setup` before running commands')
                     return
                 }
                 // Second prompt for player count
