@@ -70,7 +70,8 @@ module.exports = {
                                 structuredeckcategory: structure,
                                 speedduelcategory: speed,
                                 duellinkscategory: links,
-                                giantcardcategory: giant
+                                giantcardcategory: giant,
+                                eventEnd: false
                             })
                             currentServer.save()
                                 .then(result => {

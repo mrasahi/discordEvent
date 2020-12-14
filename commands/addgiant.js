@@ -32,7 +32,7 @@ module.exports = {
                                     // console.log(`updated db`)
                                     message.channel.send(`${messages.first().content} players will be in this event`)
                                     message.guild.channels
-                                        .create(`win-a-mat-${newGiant}`, {
+                                        .create(`giant-card-${newGiant}`, {
                                             type: 'text',
                                         })
                                         .then((channel) => {
