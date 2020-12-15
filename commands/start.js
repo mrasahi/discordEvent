@@ -33,7 +33,7 @@ module.exports = {
                     }
                     DiscordServer.findByIdAndUpdate(message.guild.id, { $set: { [eventDb]: { [eventName + '-' + result[eventDb].length]: playerCount } } }, { new: true })
                         .then(result => {
-                            console.log(result)
+                            // console.log(result)
                             // console.log(`event started and updated in db`)
                             message.channel.send(`${eventName + '-' + result[eventDb].length} has been started with ${playerCount} players`)
                         })

@@ -11,10 +11,10 @@ module.exports = {
 
         DiscordServer.findById(message.guild.id)
             .then(result => {
-                if (result) {
-                    console.log(`Server ID is already registered in database`)
+                if (result === null) {
+                    message.channel.send('Server ID has not been saved. Please run `!setup` before running commands')
+                    return
                 }
-                console.log(`will run setup`)
 
 
                     message.guild.roles.create({

@@ -18,7 +18,6 @@ module.exports = {
                     return
                 }
 
-
                 const addEvent = (eventName, eventDb, color) => {
                     if (result[eventDb].length === 0) {
                         console.log(`greater than 0`)
@@ -28,7 +27,7 @@ module.exports = {
                     let newEventNumber = result[eventDb].length + 1
                     DiscordServer.findByIdAndUpdate(message.guild.id, { $push: { [eventDb]: { [eventName + '-' + newEventNumber]: 'pending' } } }, { new: true, upsert: true })
                         .then(result => {
-                            console.log(`saved to db`)
+                            // console.log(`saved to db`)
                             message.guild.channels.create(`${eventName.toLowerCase()}-${newEventNumber}`, { type: 'text', })
                                 .then(channel => {
                                     // console.log(`channel created`)
@@ -51,7 +50,7 @@ module.exports = {
                                 reason: `${eventName} event created`,
                             })
                                 .then(() => {
-                                    console.log(`${eventName}-${newEventNumber} role created`)
+                                    // console.log(`${eventName}-${newEventNumber} role created`)
                                 })
                                 .catch(err => {
                                     console.log(`error creating ${eventName}-${newEventNumber} role`)
@@ -62,31 +61,31 @@ module.exports = {
 
                 switch (args[0]) {
                     case 'wam':
-                        console.log(`wam event`)
+                        // console.log(`wam event`)
                         addEvent('Win-A-Mat', 'wam', '3498db')
                         break
                     case 'wamex':
-                        console.log(`wamex event`)
+                        // console.log(`wamex event`)
                         addEvent('Win-A-Mat-ex', 'wamex', '206694')
                         break
                     case 'structure':
-                        console.log(`structure event`)
+                        // console.log(`structure event`)
                         addEvent('Structure-Deck', 'structure', '9b59b6')
                         break
                     case 'speed':
-                        console.log(`speed event`)
+                        // console.log(`speed event`)
                         addEvent('Speed-Duel', 'speed', 'e67e22')
                         break
                     case 'links':
-                        console.log(`duel links event`)
+                        // console.log(`duel links event`)
                         addEvent('Duel-Links', 'links', '95a5a6')
                         break
                     case 'giant':
-                        console.log(`giant event`)
+                        // console.log(`giant event`)
                         addEvent('Giant-Card', 'giant', '992d22')
                         break
                     default:
-                        console.log('invalid args')
+                        // console.log('invalid args')
                         message.channel.send('`!add` command must a be followed by `wam`  |  `wamex`  |  `structure`  |  `speed`  |  `links`  |  `giant`')
                         break
                 }
