@@ -11,8 +11,9 @@ module.exports = {
 
         DiscordServer.findById(message.guild.id)
             .then(result => {
-                if (result === null) {
-                    message.channel.send('Server ID has not been saved. Please run `!setup` before running commands')
+                if (result) {
+                    // console.log(`server exists in db. returning`)
+                    message.channel.send(`Server ID has already been saved`)
                     return
                 }
 
@@ -73,12 +74,12 @@ module.exports = {
                             const currentServer = new DiscordServer({
                                 _id: message.guild.id,
                                 serverid: message.guild.id,
-                                wam: [{ 'Win-A-Mat-1': 'pending' }],
-                                wamex: [{ 'Win-A-Mat-ex-1': 'pending' }],
-                                structuredeck: [{ 'Structure-Deck-1': 'pending' }],
-                                speed: [{ 'Speed-Duels-1': 'pending' }],
-                                links: [{ 'Duel-Links-1': 'pending' }],
-                                giant: [{ 'Giant-Card-1': 'pending' }],
+                                wam: [],
+                                wamex: [],
+                                structuredeck: [],
+                                speed: [],
+                                links: [],
+                                giant: [],
                                 wamcategory: wam,
                                 wamexcategory: wamex,
                                 structurecategory: structure,
