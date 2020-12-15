@@ -29,7 +29,7 @@ module.exports = {
                         // console.log(`will create ${eventName}`)
                         return message.channel.send(`${eventName} event has not been created yet.`)
                     } else if (Object.values(result[eventDb][result[eventDb].length - 1]).join() === 'pending') {
-                        DiscordServer.findByIdAndUpdate(message.guild.id, { $set: { [eventDb]: { [eventName + '-' + result[eventDb].length]: playerCount } } }, { new: true })
+                        DiscordServer.findByIdAndUpdate(message.guild.id,  { [eventDb]: { [eventName + '-' + result[eventDb].length]: playerCount } }, { new: true })
                         .then(result => {
                             // console.log(result)
                             // console.log(`event started and updated in db`)

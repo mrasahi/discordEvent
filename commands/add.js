@@ -21,42 +21,80 @@ module.exports = {
                 const addEvent = (eventName, eventDb, color) => {
                     if (result[eventDb].length === 0) {
                         // console.log(`greater than 0`)
-                    } else if (Object.values(result[eventDb][result[eventDb].length - 1]).join() === 'pending') {
-                        return message.channel.send(`The last ${eventName} event has not been started yet\nEnter ` + '`!start ' + `${eventDb} ` + '<number>` to start the event'  )
-                    }
-                    let newEventNumber = result[eventDb].length + 1
-                    DiscordServer.findByIdAndUpdate(message.guild.id, { $push: { [eventDb]: { [eventName + '-' + newEventNumber]: 'pending' } } }, { new: true, upsert: true })
-                        .then(result => {
-                            // console.log(`saved to db`)
-                            message.guild.channels.create(`${eventName.toLowerCase()}-${newEventNumber}`, { type: 'text', })
-                                .then(channel => {
-                                    // console.log(`channel created`)
-                                    message.channel.send(`New ${eventName} channel created`)
-                                    channel.setParent(result[eventDb + 'category'])
-                                        .then(() => {
-                                            // console.log(`moved new channel to category`)
-                                        })
-                                        .catch(err => {
-                                            console.log(err)
-                                            message.channel.send(`error moving to ${eventName} category`)
-                                        })
+                        let newEventNumber = result[eventDb].length + 1
+                        console.log(`${newEventNumber} defined outside`)
+                        DiscordServer.findByIdAndUpdate(message.guild.id, { $push: { [eventDb]: { [eventName + '-' + newEventNumber]: 'pending' } } }, { new: true, upsert: true })
+                            .then(result => {
+                                // console.log(`saved to db`)
+                                console.log(`${newEventNumber} inside update func`)
+                                message.guild.channels.create(`${eventName.toLowerCase()}-${newEventNumber}`, { type: 'text', })
+                                    .then(channel => {
+                                        // console.log(`channel created`)
+                                        message.channel.send(`New ${eventName} channel created`)
+                                        channel.setParent(result[eventDb + 'category'])
+                                            .then(() => {
+                                                // console.log(`moved new channel to category`)
+                                            })
+                                            .catch(err => {
+                                                console.log(err)
+                                                message.channel.send(`error moving to ${eventName} category`)
+                                            })
+                                    })
+                                    .catch(err => console.log(err))
+                                message.guild.roles.create({
+                                    data: {
+                                        name: `${eventName}-${newEventNumber}`,
+                                        color: color,
+                                    },
+                                    reason: `${eventName} event created`,
                                 })
-                                .catch(err => console.log(err))
-                            message.guild.roles.create({
-                                data: {
-                                    name: `${eventName}-${newEventNumber}`,
-                                    color: color,
-                                },
-                                reason: `${eventName} event created`,
+                                    .then(() => {
+                                        // console.log(`${eventName}-${newEventNumber} role created`)
+                                    })
+                                    .catch(err => {
+                                        console.log(`error creating ${eventName}-${newEventNumber} role`)
+                                    })
                             })
-                                .then(() => {
-                                    // console.log(`${eventName}-${newEventNumber} role created`)
+                            .catch(err => console.log(err))
+                    } else if (Object.values(result[eventDb][result[eventDb].length - 1]).join() === 'pending') {
+                        return message.channel.send(`The last ${eventName} event has not been started yet\nEnter ` + '`!start ' + `${eventDb} ` + '<number>` to start the event')
+                    } else {
+                        let newEventNumber = result[eventDb].length + 1
+                        console.log(result[eventDb])
+                        DiscordServer.findByIdAndUpdate(message.guild.id, { $push: { [eventDb]: { [eventName + '-' + newEventNumber]: 'pending' } } }, { new: true, upsert: true })
+                            .then(result => {
+                                // console.log(`saved to db`)
+                                message.guild.channels.create(`${eventName.toLowerCase()}-${newEventNumber}`, { type: 'text', })
+                                    .then(channel => {
+                                        // console.log(`channel created`)
+                                        message.channel.send(`New ${eventName} channel created`)
+                                        channel.setParent(result[eventDb + 'category'])
+                                            .then(() => {
+                                                // console.log(`moved new channel to category`)
+                                            })
+                                            .catch(err => {
+                                                console.log(err)
+                                                message.channel.send(`error moving to ${eventName} category`)
+                                            })
+                                    })
+                                    .catch(err => console.log(err))
+                                message.guild.roles.create({
+                                    data: {
+                                        name: `${eventName}-${newEventNumber}`,
+                                        color: color,
+                                    },
+                                    reason: `${eventName} event created`,
                                 })
-                                .catch(err => {
-                                    console.log(`error creating ${eventName}-${newEventNumber} role`)
-                                })
-                        })
-                        .catch(err => console.log(err))
+                                    .then(() => {
+                                        // console.log(`${eventName}-${newEventNumber} role created`)
+                                    })
+                                    .catch(err => {
+                                        console.log(`error creating ${eventName}-${newEventNumber} role`)
+                                    })
+                            })
+                            .catch(err => console.log(err))
+                    }
+
                 }
 
                 switch (args[0]) {
