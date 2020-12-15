@@ -28,10 +28,8 @@ module.exports = {
                     if (result[eventDb].length === 0) {
                         // console.log(`will create ${eventName}`)
                         return message.channel.send(`${eventName} event has not been created yet.`)
-                    } else if (Object.values(result[eventDb][result[eventDb].length - 1]).join() !== 'pending') {
-                        return message.channel.send(`A new ${eventName} event must be added first`)
-                    }
-                    DiscordServer.findByIdAndUpdate(message.guild.id, { $set: { [eventDb]: { [eventName + '-' + result[eventDb].length]: playerCount } } }, { new: true })
+                    } else if (Object.values(result[eventDb][result[eventDb].length - 1]).join() === 'pending') {
+                        DiscordServer.findByIdAndUpdate(message.guild.id, { $set: { [eventDb]: { [eventName + '-' + result[eventDb].length]: playerCount } } }, { new: true })
                         .then(result => {
                             // console.log(result)
                             // console.log(`event started and updated in db`)
@@ -41,6 +39,10 @@ module.exports = {
                             console.log(err)
                             message.channel.send(`An error has occured updating ${eventDb} in db`)
                         })
+                    } else {
+                        return message.channel.send(`A new ${eventName} event must be added first`)
+                    }
+
                 }
 
                 switch (args[0]) {

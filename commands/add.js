@@ -20,7 +20,7 @@ module.exports = {
 
                 const addEvent = (eventName, eventDb, color) => {
                     if (result[eventDb].length === 0) {
-                        console.log(`greater than 0`)
+                        // console.log(`greater than 0`)
                     } else if (Object.values(result[eventDb][result[eventDb].length - 1]).join() === 'pending') {
                         return message.channel.send(`The last ${eventName} event has not been started yet\nEnter ` + '`!start ' + `${eventDb} ` + '<number>` to start the event'  )
                     }
