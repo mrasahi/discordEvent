@@ -2,7 +2,7 @@
 const fs = require('fs')
 const Discord = require('discord.js');
 // const { token, prefix, mongoPath } = require('./config.json');
-const { token } = require('./config.json')
+// const { token } = require('./config.json')
 const mongoose = require('mongoose')
 
 // Command prefix and db path
@@ -68,18 +68,15 @@ client.on('message', message => {
         return message.reply('Command is only from server-side');
     }
 
-
     // Only 'Admin' Role can use bot commands
     if (!message.member.roles.cache.find(role => role.name === 'Admin')) {
-        console.log(`member has does not have Admin`)
+        console.log('member has does not have `Admin`')
         return message.channel.send('Admin role required').then(msg => msg.delete({ timeout: 3000 }))
         .catch(err => console.log(err))
     }
 
     // Shortened to run commands
     command.execute(message, args)
-
-
 
 })
 
