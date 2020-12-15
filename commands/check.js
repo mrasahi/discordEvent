@@ -11,6 +11,12 @@ module.exports = {
     execute(message, args) {
 
         console.log(`Check command`)
-        
+
+        DiscordServer.findById(message.guild.id)
+            .then(result => {
+                console.log(result.giant)
+            })
+            .catch(err => console.log(err))
+
     },
 };

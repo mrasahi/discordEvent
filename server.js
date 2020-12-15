@@ -60,7 +60,7 @@ client.on('message', message => {
 
     // Checks if args is required true for command
     if (command.args && !args.length) {
-	    return message.channel.send(`Arguments required for this command, ${message.author}!`);
+	    return message.channel.send('An `<input>` must follow this command');
     }
 
     // guildOnly are commands only meant to be used inside servers and not through DMs

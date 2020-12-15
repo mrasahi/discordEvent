@@ -19,15 +19,15 @@ module.exports = {
                     return
                 }
                 // Second prompt for player count
-                message.channel.send(`Creating Giant-Card-${result.giantcard.length +1}\nHow many players are in this event?`).then(() => {
+                message.channel.send(`Creating Giant-Card-${result.giant.length +1}\nHow many players are in this event?`).then(() => {
                     const filter = m => message.author.id === m.author.id;
                     message.channel.awaitMessages(filter, { time: 60000, max: 1, errors: ['time'] })
                         .then(messages => {
                             // Check reply message statement
                             if (messages.first().content >= 0) {
-                                let newGiant = result.giantcard.length + 1
+                                let newGiant = result.giant.length + 1
                                 // console.log(newGiant)
-                                DiscordServer.findByIdAndUpdate(message.guild.id, { $push: { giantcard: {["Giant-Card-" + newGiant]: messages.first().content} }}, {new:true, upsert:true} )
+                                DiscordServer.findByIdAndUpdate(message.guild.id, { $push: { giant: {["Giant-Card-" + newGiant]: messages.first().content} }}, {new:true, upsert:true} )
                                 .then(() => {
                                     // console.log(`updated db`)
                                     message.channel.send(`${messages.first().content} players will be in this event`)
@@ -37,7 +37,7 @@ module.exports = {
                                         })
                                         .then((channel) => {
                                             // console.log(channel)
-                                            channel.setParent(result.giantcardcategory)
+                                            channel.setParent(result.giantcategory)
                                                 .then(() => {
                                                     message.channel.send(`Channel Giant-Card-${newGiant} has been created.`)
                                                 })

@@ -14,10 +14,10 @@ module.exports = {
 
                 let wam = result.wam.length
                 let wamex = result.wamex.length
-                let structure = result.structuredeck.length
-                let speed = result.speedduel.length
-                let links = result.duellinks.length
-                let giant = result.giantcard.length
+                let structure = result.structure.length
+                let speed = result.speed.length
+                let links = result.links.length
+                let giant = result.giant.length
 
                 message.channel.send(`Win-A-Mat: ${wam}\nWin-A-Mat-Ex: ${wamex}\nStructure Deck: ${structure}\nSpeed Duels: ${speed}\nDuel Links: ${links}\nGiant Card: ${giant}\n===============\nTotal Events: ${wam + wamex + structure + speed + links + giant}`)
 
