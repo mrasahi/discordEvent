@@ -12,6 +12,10 @@ module.exports = {
         // Will update eventEnd status to true and allow cleanup command
         DiscordServer.findByIdAndUpdate(message.guild.id, { eventEnd: true })
             .then(result => {
+                if (result === null) {
+                    message.channel.send('Server ID has not been saved. Please run `!setup` before running commands')
+                    return
+                }
                 message.channel.send('Event ended. The `!cleanup` command is available')
             })
             .catch(err => {

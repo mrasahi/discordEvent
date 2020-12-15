@@ -11,9 +11,9 @@ module.exports = {
     execute(message, args) {
 
         if (!args[1]) {
-            return message.channel.send('A number is missing after `!start <event>`')
+            return message.channel.send('A number is missing in `!start <event> <number>`')
         } else if (!Number.isInteger(parseInt(args[1]))) {
-            return message.channel.send('A valid number must follow the event name after `!start <event>`')
+            return message.channel.send('Must be a valid number in `!start <event> <number>`')
         }
 
         // Fetches current server info from database
