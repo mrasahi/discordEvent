@@ -21,6 +21,10 @@ module.exports = {
         // Check if event has ended before cleanup
         DiscordServer.findById(message.guild.id)
             .then(result => {
+                if (result === null) {
+                    message.channel.send('Server ID has not been saved. Please run `!setup` before running commands')
+                    return
+                }
                 // If event has ended
                 if (result.eventEnd) {
                     // Delete Function for channels and roles

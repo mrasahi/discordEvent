@@ -14,7 +14,7 @@ module.exports = {
 
         DiscordServer.findById(message.guild.id)
             .then(result => {
-                console.log(result.giant)
+                console.log(result)
             })
             .catch(err => console.log(err))
 

@@ -69,6 +69,7 @@ client.on('message', message => {
     }
 
 
+    // Only 'Admin' Role can use bot commands
     if (!message.member.roles.cache.find(role => role.name === 'Admin')) {
         console.log(`member has does not have Admin`)
         return message.channel.send('Admin role required').then(msg => msg.delete({ timeout: 3000 }))

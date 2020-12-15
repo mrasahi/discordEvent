@@ -11,6 +11,10 @@ module.exports = {
     execute(message, args) {
         DiscordServer.findById(message.guild.id)
             .then(result => {
+                if (result === null) {
+                    message.channel.send('Server ID has not been saved. Please run `!setup` before running commands')
+                    return
+                }
 
                 let wam = result.wam.length
                 let wamex = result.wamex.length

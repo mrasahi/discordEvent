@@ -12,6 +12,10 @@ module.exports = {
 
         DiscordServer.findById(message.guild.id)
             .then(result => {
+                if (result === null) {
+                    message.channel.send('Server ID has not been saved. Please run `!setup` before running commands')
+                    return
+                }
 
                 const playerCount = (eventDb, roleName) => {
                     if (result[eventDb].length === 0) {
