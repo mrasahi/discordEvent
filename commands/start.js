@@ -34,7 +34,7 @@ module.exports = {
                     DiscordServer.findByIdAndUpdate(message.guild.id, { $set: { [eventDb]: { [eventName + '-' + result[eventDb].length]: playerCount } } }, { new: true })
                         .then(result => {
                             console.log(result)
-                            console.log(`updated`)
+                            // console.log(`event started and updated in db`)
                             message.channel.send(`${eventName + '-' + result[eventDb].length} has been started with ${playerCount} players`)
                         })
                         .catch(err => {
@@ -45,36 +45,31 @@ module.exports = {
 
                 switch (args[0]) {
                     case 'wam':
-                        console.log(`wam event`)
+                        // console.log(`wam event`)
                         startEvent('Win-A-Mat', 'wam', args[1])
                         break
                     case 'wamex':
-                        console.log(`wamex event`)
+                        // console.log(`wamex event`)
                         startEvent('Win-A-Mat-ex', 'wamex', args[1])
                         break
                     case 'structure':
-                        console.log(`structure event`)
+                        // console.log(`structure event`)
                         startEvent('Structure-Deck', 'structure', args[1])
                         break
                     case 'speed':
-                        console.log(`speed event`)
+                        // console.log(`speed event`)
                         startEvent('Speed-Duel', 'speed', args[1])
                         break
                     case 'links':
-                        console.log(`duel links event`)
+                        // console.log(`duel links event`)
                         startEvent('Duel-Links', 'links', args[1])
                         break
                     case 'giant':
-                        console.log(`giant event`)
+                        // console.log(`giant event`)
                         startEvent('Giant-Card', 'giant', args[1])
                         break
                     default:
-                        console.log('invalid args')
-                        if (result.speed.length === 0 || Object.values(result.speed[result.speed.length - 1]) !== 'pending') {
-                            console.log(`able to create event`)
-                        } else {
-                            console.log(`last event pending`)
-                        }
+                        // console.log('invalid args')
                         message.channel.send('`!start` command must a be followed by `wam`  |  `wamex`  |  `structure`  |  `speed`  |  `links`  |  `giant`')
                         break
                 }

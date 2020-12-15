@@ -13,24 +13,23 @@ module.exports = {
         DiscordServer.findById(message.guild.id)
             .then(result => {
 
-                const playerCount = (event, roleName) => {
-                    if (result[event].length === 0) {
-                        return `${roleName} event not created\n`
+                const playerCount = (eventDb, roleName) => {
+                    if (result[eventDb].length === 0) {
+                        return `${roleName} eventDb not created\n=========================\n`
                     } else {
-                        let count = message.guild.roles.cache.find(role => role.name === `${roleName}-${result[event].length}`).members.map(m => m.user).length
-                        return `${roleName}-${result[event].length}: ${count} player(s) assigned\n`
+                        let count = message.guild.roles.cache.find(role => role.name === `${roleName}-${result[eventDb].length}`).members.map(m => m.user).length
+                        return `${roleName}-${result[eventDb].length}\nPlayers:  ${count}\n=========================\n`
                     }
                 }
 
                 let wam = playerCount(`wam`, `Win-A-Mat`)
-                let wamex = playerCount(`wamex`, `Win-A-Mat-Ex`)
-                let structure = playerCount(`structuredeck`, `Structure-Deck`)
-                let speed = playerCount(`speedduel`, `Speed-Duel`)
-                let links = playerCount(`duellinks`, `Duel-Links`)
-                let giant = playerCount(`giantcard`, `Giant-Card`)
+                let wamex = playerCount(`wamex`, `Win-A-Mat-ex`)
+                let structure = playerCount(`structure`, `Structure-Deck`)
+                let speed = playerCount(`speed`, `Speed-Duel`)
+                let links = playerCount(`links`, `Duel-Links`)
+                let giant = playerCount(`giant`, `Giant-Card`)
                 
-
-                message.channel.send(wam + wamex + structure + speed + links + giant)
+                message.channel.send('=========================\n' + wam + wamex + structure + speed + links + giant)
 
                 // console.log(message.guild.roles.cache.find(role => role.name === `Win-A-Mat-${wam}`).members.map(m => m.user).length)
 
