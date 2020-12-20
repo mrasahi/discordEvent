@@ -29,7 +29,6 @@ module.exports = {
                         // console.log(`will create ${eventName}`)
                         return message.channel.send(`${eventName} event has not been created yet.`)
                     } else if (Object.values(result[eventDb][result[eventDb].length - 1]).join() === 'pending') {
-                        console.log([eventDb] + '.' + [eventName + '-' + [result[eventDb].length]])
                         DiscordServer.updateOne({ _id: message.guild.id, [eventDb + '.' + [eventName + '-' + [result[eventDb].length]]]: 'pending' },  { $set: { [[eventDb] + '.$.' + [eventName + '-' + [result[eventDb].length]]]: playerCount }}, { new: true })
                         .then(res => {
                             // console.log(result)
@@ -41,7 +40,7 @@ module.exports = {
                             message.channel.send(`An error has occured updating ${eventDb} in db`)
                         })
                     } else {
-                        return message.channel.send(`A new ${eventName} event must be added first`)
+                        return message.channel.send(`A new ${eventName} event must be added first ` + 'with `!add <event>`')
                     }
 
                 }

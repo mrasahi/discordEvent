@@ -25,7 +25,6 @@ module.exports = {
                         return message.channel.send(`The last ${eventName} event has not been started yet\nEnter ` + '`!start ' + `${eventDb} ` + '<number>` to start the event')
                     }
 
-                    console.log(result[eventDb])
                     DiscordServer.findByIdAndUpdate(message.guild.id, { $push: { [eventDb]: { [eventName + '-' + [result[eventDb].length + 1]]: 'pending' } } }, { new: true})
                         .then(res => {
                             // console.log(`saved to db`)

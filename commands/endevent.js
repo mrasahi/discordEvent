@@ -3,7 +3,7 @@ const client = new Discord.Client()
 const DiscordServer = require('../models/DiscordServer.js')
 
 module.exports = {
-    name: 'eventend',
+    name: 'endevent',
     description: 'Marks the Event as ended true',
     args: false,
     usage: '<user> <role>',
