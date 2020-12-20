@@ -4,17 +4,11 @@ const DiscordServer = require('../models/DiscordServer.js')
 
 
 module.exports = {
-    name: 'start',
-    description: 'Start an event and mark how many players in it',
+    name: 'check',
+    description: 'Test command to check db event',
     args: true,
     usage: '<user> <role>',
     execute(message, args) {
-
-        if (!args[1]) {
-            return message.channel.send('A number is missing in `!start <event> <number>`')
-        } else if (!Number.isInteger(parseInt(args[1]))) {
-            return message.channel.send('Must be a valid number in `!start <event> <number>`')
-        }
 
         // Fetches current server info from database
         DiscordServer.findById(message.guild.id)
@@ -24,23 +18,16 @@ module.exports = {
                     return
                 }
 
-                const startEvent = (eventName, eventDb, playerCount) => {
+                const checkEvent = (eventName, eventDb) => {
+                    console.log({ [eventDb]: { [eventName + '-' + [result[eventDb].length]]: 'playerCount' } })
+                    console.log(result[eventDb])
                     if (result[eventDb].length === 0) {
                         // console.log(`will create ${eventName}`)
                         return message.channel.send(`${eventName} event has not been created yet.`)
                     } else if (Object.values(result[eventDb][result[eventDb].length - 1]).join() === 'pending') {
-                        console.log([eventDb] + '.' + [eventName + '-' + [result[eventDb].length]])
-                        DiscordServer.updateOne({ _id: message.guild.id, [eventDb + '.' + [eventName + '-' + [result[eventDb].length]]]: 'pending' },  { $set: { [[eventDb] + '.$.' + [eventName + '-' + [result[eventDb].length]]]: playerCount }}, { new: true })
-                        .then(res => {
-                            // console.log(result)
-                            // console.log(`event started and updated in db`)
-                            message.channel.send(`${eventName + '-' + [result[eventDb].length]} has been started with ${playerCount} players`)
-                        })
-                        .catch(err => {
-                            console.log(err)
-                            message.channel.send(`An error has occured updating ${eventDb} in db`)
-                        })
+                        console.log(eventName + '-' + [result[eventDb].length])
                     } else {
+                        console.log(eventName + '-' + [result[eventDb].length])
                         return message.channel.send(`A new ${eventName} event must be added first`)
                     }
 
@@ -49,27 +36,27 @@ module.exports = {
                 switch (args[0]) {
                     case 'wam':
                         // console.log(`wam event`)
-                        startEvent('Win-A-Mat', 'wam', args[1])
+                        checkEvent('Win-A-Mat', 'wam')
                         break
                     case 'wamex':
                         // console.log(`wamex event`)
-                        startEvent('Win-A-Mat-ex', 'wamex', args[1])
+                        checkEvent('Win-A-Mat-ex', 'wamex')
                         break
                     case 'structure':
                         // console.log(`structure event`)
-                        startEvent('Structure-Deck', 'structure', args[1])
+                        checkEvent('Structure-Deck', 'structure')
                         break
                     case 'speed':
                         // console.log(`speed event`)
-                        startEvent('Speed-Duel', 'speed', args[1])
+                        checkEvent('Speed-Duel', 'speed')
                         break
                     case 'links':
                         // console.log(`duel links event`)
-                        startEvent('Duel-Links', 'links', args[1])
+                        checkEvent('Duel-Links', 'links')
                         break
                     case 'giant':
                         // console.log(`giant event`)
-                        startEvent('Giant-Card', 'giant', args[1])
+                        checkEvent('Giant-Card', 'giant')
                         break
                     default:
                         // console.log('invalid args')
