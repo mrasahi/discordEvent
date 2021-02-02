@@ -1,1 +1,3 @@
 # discordEvent
+
+Discord Event Bot
